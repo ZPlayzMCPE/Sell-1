@@ -71,7 +71,7 @@ class Main extends PluginBase implements Listener{
 				if($sender->hasPermission("sell") || $sender->hasPermission("sell.hand") || $sender->hasPermission("sell.all")){
 					/* Disallow non-survival mode abuse */
 					if(!$sender->isSurvival()){
-						$sender->sendMessage(TF::RED . TF::BOLD ."Error: ". TF::RESET . TF::DARK_RED ."Please switch back to survival mode.");
+						$sender->sendMessage(TF::RED . TF::BOLD ."&2§lError: ". TF::RESET . TF::DARK_RED ."§4Please switch back to survival mode.");
 						return false;
 					}
 					
@@ -79,33 +79,33 @@ class Main extends PluginBase implements Listener{
 					if(isset($args[0]) && strtolower($args[0]) == "hand"){
 						if(!$sender->hasPermission("sell.hand")){
 							$error_handPermission = $this->messages->get("error-nopermission-sellHand");
-							$sender->sendMessage(TF::RED . TF::BOLD . "Error: " . TF::RESET . TF::RED . $error_handPermission);
+							$sender->sendMessage(TF::RED . TF::BOLD . "§2§lError: " . TF::RESET . TF::RED . $error_handPermission);
 							return false;
 						}
 						$item = $sender->getInventory()->getItemInHand();
 						$itemId = $item->getId();
 						/* Check if the player is holding a block */
 						if($item->getId() === 0){
-							$sender->sendMessage(TF::RED . TF::BOLD ."Error: ". TF::RESET . TF::DARK_RED ."You aren't holding any blocks/items.");
+							$sender->sendMessage(TF::DARK_GREEN . TF::BOLD ."§2§lError: ". TF::RESET . TF::DARK_RED ."§6You aren't holding any blocks/items.");
 							return false;
 						}
 						/* Recheck if the item the player is holding is a block */
 						if($this->sell->get($itemId) == null){
-							$sender->sendMessage(TF::RED . TF::BOLD ."Error: ". TF::RESET . TF::GREEN . $item->getName() . TF::DARK_RED ." cannot be sold.");
+							$sender->sendMessage(TF::RED . TF::BOLD ."§2§lError: §r§cThe item named ". TF::RESET . TF::DARK_GREEN . $item->getName() . TF::DARK_RED ." §ccannot be sold.");
 							return false;
 						}
 						/* Sell the item in the player's hand */
 						EconomyAPI::getInstance()->addMoney($sender, $this->sell->get($itemId) * $item->getCount());
 						$sender->getInventory()->removeItem($item);
 						$price = $this->sell->get($item->getId()) * $item->getCount();
-						$sender->sendMessage(TF::GREEN . TF::BOLD . "(!) " . TF::RESET . TF::GREEN . "$" . $price . " has been added to your account.");
-						$sender->sendMessage(TF::GREEN . "Sold for " . TF::RED . "$" . $price . TF::GREEN . " (" . $item->getCount() . " " . $item->getName() . " at $" . $this->sell->get($itemId) . " each).");
+						$sender->sendMessage(TF::GREEN . TF::GREEN . "§5$" . $price . " §dhas been added to your account.");
+						$sender->sendMessage(TF::GREEN . "§bSold for " . TF::RED . "§3$" . $price . TF::GREEN . " §3" . $item->getCount() . " " . $item->getName() . " §bat §3$" . $this->sell->get($itemId) . " §beach.");
 
 					/* Sell All */
 					}elseif(isset($args[0]) && strtolower($args[0]) == "all"){
 						if(!$sender->hasPermission("sell.all")){
 							$error_allPermission = $this->messages->get("error-nopermission-sellAll");
-							$sender->sendMessage(TF::RED . TF::BOLD . "Error: " . TF::RESET . TF::RED . $error_allPermission);
+							$sender->sendMessage(TF::RED . TF::BOLD . "§2§lError " . TF::RESET . TF::RED . $error_allPermission);
 							return false;
 						}
 						$items = $sender->getInventory()->getContents();
@@ -113,21 +113,22 @@ class Main extends PluginBase implements Listener{
 							if($this->sell->get($item->getId()) !== null && $this->sell->get($item->getId()) > 0){
 								$price = $this->sell->get($item->getId()) * $item->getCount();
 								EconomyAPI::getInstance()->addMoney($sender, $price);
-								$sender->sendMessage(TF::GREEN . TF::BOLD . "(!) " . TF::RESET . TF::GREEN . "Sold for " . TF::RED . "$" . $price . TF::GREEN . " (" . $item->getCount() . " " . $item->getName() . " at $" . $this->sell->get($item->getId()) . " each).");
+								$sender->sendMessage(TF::GREEN . "§bSold for " . TF::RED . "§3$" . $price . TF::GREEN . " §5" . $item->getCount() . " §3" . $item->getName() . " §bat §3$" . $this->sell->get($item->getId()) . " §beach.");
 								$sender->getInventory()->remove($item);
 							}
 						}
 					}elseif(isset($args[0]) && strtolower($args[0]) == "about"){
-						$sender->sendMessage(TF::RED . TF::BOLD . "(!) " . TF::RESET . TF::GRAY . "This server uses the plugin, Sell Hand, by Muqsit Rayyan and fixed by JackMD.");
+						$sender->sendMessage(TF::RED . TF::RESET . TF::GRAY . "§aThis plugin is Sell Hand, based from Factions, and Prisons.");
 					}else{
-						$sender->sendMessage(TF::RED . TF::BOLD . "(!) " . TF::RESET . TF::DARK_RED . "Sell Online Market");
-						$sender->sendMessage(TF::RED . "- " . TF::DARK_RED . "/sell hand " . TF::GRAY . "- Sell the item that's in your hand.");
-						$sender->sendMessage(TF::RED . "- " . TF::DARK_RED . "/sell all " . TF::GRAY . "- Sell every possible thing in inventory.");
+						$sender->sendMessage(TF::RED . TF::RESET . TF::DARK_RED . "§6Sell §bHelp!");
+						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell hand " . TF::GRAY . "- §7Sell the item that's in your hand.");
+						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell all " . TF::GRAY . "- §7Sell every possible thing in inventory.");
+						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell about " . TF::GRAY . "- §7Plugin information");
 						return true;
 					}
 				}else{
 					$error_permission = $this->messages->get("error-permission");
-					$sender->sendMessage(TF::RED . TF::BOLD . "Error: " . TF::RESET . TF::RED . $error_permission);
+					$sender->sendMessage(TF::RED . TF::BOLD . "§2§lError: " . TF::RESET . TF::RED . $error_permission);
 				}
 				break;
 		}
