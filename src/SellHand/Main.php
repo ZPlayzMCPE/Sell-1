@@ -71,7 +71,7 @@ class Main extends PluginBase implements Listener{
 				if($sender->hasPermission("sell") || $sender->hasPermission("sell.hand") || $sender->hasPermission("sell.all")){
 					/* Disallow non-survival mode abuse */
 					if(!$sender->isSurvival()){
-						$sender->sendMessage(TF::RED . TF::BOLD ."&2§lError: ". TF::RESET . TF::DARK_RED ."§4Please switch back to survival mode.");
+						$sender->sendMessage(TF::RED . TF::BOLD ."§2§lError: ". TF::RESET . TF::DARK_RED ."§cPlease switch back to survival mode.");
 						return false;
 					}
 					
@@ -99,7 +99,7 @@ class Main extends PluginBase implements Listener{
 						$sender->getInventory()->removeItem($item);
 						$price = $this->sell->get($item->getId()) * $item->getCount();
 						$sender->sendMessage(TF::GREEN . TF::GREEN . "§5$" . $price . " §dhas been added to your account.");
-						$sender->sendMessage(TF::GREEN . "§bSold for " . TF::RED . "§3$" . $price . TF::GREEN . " §3" . $item->getCount() . " " . $item->getName() . " §bat §3$" . $this->sell->get($itemId) . " §beach.");
+						$sender->sendMessage(TF::GREEN . "§bSold for " . TF::RED . "§3$" . $price . TF::GREEN . " §bAmount: §3" . $item->getCount() . " §bName: §3" . $item->getName() . " §bat §3$" . $this->sell->get($itemId) . " §beach.");
 
 					/* Sell All */
 					}elseif(isset($args[0]) && strtolower($args[0]) == "all"){
@@ -113,17 +113,18 @@ class Main extends PluginBase implements Listener{
 							if($this->sell->get($item->getId()) !== null && $this->sell->get($item->getId()) > 0){
 								$price = $this->sell->get($item->getId()) * $item->getCount();
 								EconomyAPI::getInstance()->addMoney($sender, $price);
-								$sender->sendMessage(TF::GREEN . "§bSold for " . TF::RED . "§3$" . $price . TF::GREEN . " §5" . $item->getCount() . " §3" . $item->getName() . " §bat §3$" . $this->sell->get($item->getId()) . " §beach.");
+								$sender->sendMessage(TF::GREEN . "§bSold for " . TF::RED . "§3$" . $price . TF::GREEN . " §bAmount: §5" . $item->getCount() . " §bName: §3" . $item->getName() . " §bat §3$" . $this->sell->get($item->getId()) . " §beach.");
 								$sender->getInventory()->remove($item);
 							}
 						}
 					}elseif(isset($args[0]) && strtolower($args[0]) == "about"){
 						$sender->sendMessage(TF::RED . TF::RESET . TF::GRAY . "§aThis plugin is Sell Hand, based from Factions, and Prisons.");
 					}else{
-						$sender->sendMessage(TF::RED . TF::RESET . TF::DARK_RED . "§6Sell §bHelp!");
+						$sender->sendMessage(TF::RED . TF::RESET . TF::DARK_RED . "§7[§6Sell §bHelp!§7]");
 						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell hand " . TF::GRAY . "- §7Sell the item that's in your hand.");
 						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell all " . TF::GRAY . "- §7Sell every possible thing in inventory.");
 						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell about " . TF::GRAY . "- §7Plugin information");
+						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell info " . TF::GRAY . "- §7Command coming soon");
 						return true;
 					}
 				}else{
