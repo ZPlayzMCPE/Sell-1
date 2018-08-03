@@ -21,6 +21,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\utils\Config;
+use PiggyCustomEnchants\CustomEnchants\CustomEnchantsId;
 use pocketmine\item\Item;
 use pocketmine\utils\TextFormat as TF;
 use onebone\economyapi\EconomyAPI;
@@ -55,7 +56,101 @@ public $enchantments = [
 		24 => "LURE",
 		25 => "FROST_WALKER",
 		26 => "MENDING",
-	];
+	        100 => "LIFESTEAL",
+    		101 => "BLIND",
+                102 => "DEATHBRINGER",
+    		103 => "GOOEY",
+    		104 => "POISON",
+    		108 => "AUTOREPAIR",
+    		109 => "CRIPPLE",
+    	        109 => "CRIPPLINGSTRIKE",
+   		111 => "VAMPIRE",
+    		113 => "CHARGE",
+    		114 => "AERIAL",
+    		115 => "WITHER",
+    		117 => "DISARMING",
+    		118 => "SOULBOUND",
+    		119 => "HALLUCINATION",
+                120 => "BLESSED",
+    		121 => "DISARMR",
+    		122 => "BACKSTAB",
+    		123 => "LIGHTNING",
+    		200 => "EXPLOSIVE", //Not accurate
+    		201 => "SMELTING",
+    		202 => "ENERGIZING",
+    		203 => "QUICKENING",
+    		204 => "LUMBERJACK",
+    		205 => "TELEPATHY",
+    		206 => "DRILLER",
+    		207 => "HASTE",
+    		208 => "FERTILIZER",
+    		209 => "FARMER",
+    		210 => "HARVEST",
+    		211 => "OXYGENATE",
+		212 => "JACKPOT",
+		301 => "WITHERSKULL",
+   	        303 => "PARALYZE",
+		304 => "MOLOTOV",
+		305 => "VOLLEY",
+    		306 => "AUTOAIM",
+    		307 => "PIERCING",
+    		308 => "SHUFFLE",
+    		309 => "BOUNTYHUNTER",
+    		310 => "HEALING",
+   		311 => "BLAZE",
+    		312 => "HEADHUNTER",
+    		313 => "GRAPPLING",
+    		314 => "PORKIFIED",
+    		315 => "MISSILE",
+    		316 => "PLACEHOLDER",
+    /*//ARMOR
+    const MOLTEN = 400;
+    const ENLIGHTED = 401;
+    const HARDENED = 402;
+    const POISONED = 403;
+    const FROZEN = 404;
+    const OBSIDIANSHIELD = 405;
+    const REVULSION = 406;
+    const SELFDESTRUCT = 407;
+    const CURSED = 408;
+    const ENDERSHIFT = 409;
+    const DRUNK = 410;
+    const BERSERKER = 411;
+    const CLOAKING = 412;
+    const REVIVE = 413;
+    const SHRINK = 414;
+    const GROW = 415;
+    const CACTUS = 416;
+    const ANTIKNOCKBACK = 417;
+    const FORCEFIELD = 418;
+    const OVERLOAD = 419;
+    const ARMORED = 420;
+    const TANK = 421;
+    const HEAVY = 422;
+    const SHIELDED = 423;
+    const POISONOUSCLOUD = 424;
+    //HELMET
+    const IMPLANTS = 600;
+    const GLOWING = 601;
+    const MEDITATION = 602;
+    const FOCUSED = 603;
+    const ANTITOXIN = 604;
+    //CHESTPLATE
+    const PARACHUTE = 800;
+    const CHICKEN = 801;
+    const PROWL = 802;
+    const SPIDER = 803;
+    const ENRAGED = 804;
+    const VACUUM = 805;
+    //BOOTS
+    const GEARS = 500;
+    const SPRINGS = 501;
+    const STOMP = 502;
+    const JETPACK = 503;
+    const MAGMAWALKER = 504;
+    //COMPASS
+    const RADAR = 700;
+	*/];
 	public function onLoad(){
 		$this->getLogger()->info("§ePlugin Loading!");
 	}
