@@ -103,54 +103,49 @@ public $enchantments = [
     		314 => "PORKIFIED",
     		315 => "MISSILE",
     		316 => "PLACEHOLDER",
-    /*//ARMOR
-    const MOLTEN = 400;
-    const ENLIGHTED = 401;
-    const HARDENED = 402;
-    const POISONED = 403;
-    const FROZEN = 404;
-    const OBSIDIANSHIELD = 405;
-    const REVULSION = 406;
-    const SELFDESTRUCT = 407;
-    const CURSED = 408;
-    const ENDERSHIFT = 409;
-    const DRUNK = 410;
-    const BERSERKER = 411;
-    const CLOAKING = 412;
-    const REVIVE = 413;
-    const SHRINK = 414;
-    const GROW = 415;
-    const CACTUS = 416;
-    const ANTIKNOCKBACK = 417;
-    const FORCEFIELD = 418;
-    const OVERLOAD = 419;
-    const ARMORED = 420;
-    const TANK = 421;
-    const HEAVY = 422;
-    const SHIELDED = 423;
-    const POISONOUSCLOUD = 424;
-    //HELMET
-    const IMPLANTS = 600;
-    const GLOWING = 601;
-    const MEDITATION = 602;
-    const FOCUSED = 603;
-    const ANTITOXIN = 604;
-    //CHESTPLATE
-    const PARACHUTE = 800;
-    const CHICKEN = 801;
-    const PROWL = 802;
-    const SPIDER = 803;
-    const ENRAGED = 804;
-    const VACUUM = 805;
-    //BOOTS
-    const GEARS = 500;
-    const SPRINGS = 501;
-    const STOMP = 502;
-    const JETPACK = 503;
-    const MAGMAWALKER = 504;
-    //COMPASS
-    const RADAR = 700;
-	*/];
+		400 => "MOLTEN",
+    		401 => "ENLIGHTED",
+    		402 => "HARDENED",
+		403 => "POISONED",
+		404 => "FROZEN",
+		405 => "OBSIDIANSHIELD",
+		406 => "REVULSION",
+    		407 => "SELFDESTRUCT",
+		408 => "CURSED",
+		409 => "ENDERSHIFT",
+		410 => "DRUNK",
+		411 => "BERSERKER",
+		412 => "CLOAKING",
+		413 => "REVIVE",
+		414 => "SHRINK",
+		415 => "GROW",
+   		416 => "CACTUS",
+		417 => "ANTIKNOCKBACK",
+		418 => "FORCEFIELD",
+		419 => "OVERLOAD",
+		420 => "ARMORED",
+		421 => "TANK",
+		422 => "HEAVY",
+		423 => "SHIELDED",
+		424 => "POISONOUSCLOUD",
+    		600 => "IMPLANTS",
+    		601 => "GLOWING",
+		602 => "MEDITATION",
+		603 => "FOCUSED",
+		604 => "ANTITOXIC",
+		800 => "PARACHUTE",
+    		801 => "CHICKEN",
+		802 => "PROWL",
+    		803 => "SPIDER",
+    		804 => "ENRAGED",
+    		805 => "VACUUM",
+    		500 => "GEARS",
+    		501 => "SPRINGS",
+    		502 => "STOMP",
+    		503 => "JETPACK",
+    		504 => "MAGMAWALKER",
+    		700 => "RADAR",
+	];
 	public function onLoad(){
 		$this->getLogger()->info("§ePlugin Loading!");
 	}
