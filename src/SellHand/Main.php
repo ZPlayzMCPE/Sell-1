@@ -162,7 +162,7 @@ public $enchantments = [
 						$enchantmentsid = $enchantments->getId();
 						$enchantmentslevel = $enchantments->getLevel();
 						$names = $this->enchantments[$enchantmentsid];
-						$sender->sendMessage("§3 $names §5$elevel");
+						$sender->sendMessage("§3 $names §5$enchantmentslevel");
 					}
 				} else {
 					$sender->sendMessage("§cNone");
