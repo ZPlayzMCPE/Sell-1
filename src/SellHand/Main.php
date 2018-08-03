@@ -27,6 +27,35 @@ use onebone\economyapi\EconomyAPI;
 
 class Main extends PluginBase implements Listener{
 
+public $enchantments = [
+		0 => "PROTECTION", 
+		1 => "FIRE_PROTECTION", 
+		2 => "FEATHER_FALLING",
+		3 => "BLAST_PROTECTION", 
+		4 => "PROJECTILE_PROTECTION", 
+		5 => "THORNS",
+		6 => "RESPIRATION", 
+		7 => "DEPTH_STRIDER",
+		8 => "AQUA_AFFINITY",
+		9 => "SHARPNESS", 
+		10 => "SMITE", 
+		11 => "BANE_OF_ARTHROPODS",
+		12 => "KNOCKBACK",
+		13 => "FIRE_ASPECT",
+		14 => "LOOTING",
+		15 => "EFFICIENCY",
+		16 => "SILK_TOUCH",
+		17 => "UNBREAKING",
+		18 => "FORTUNE",
+		19 => "POWER",
+		20 => "PUNCH",
+		21 => "FLAME",
+		22 => "INFINITY",
+		23 => "LUCK_OF_THE_SEA",
+		24 => "LURE",
+		25 => "FROST_WALKER",
+		26 => "MENDING",
+	];
 	public function onLoad(){
 		$this->getLogger()->info("§ePlugin Loading!");
 	}
@@ -120,12 +149,26 @@ class Main extends PluginBase implements Listener{
 						}
 					}
 					if(isset($args[0]) && strtolower($args[0]) == "info"){
-						$item = $sender->getInventory()->getItemInHand();
-						$itemName = $item->getName();
-						$itemId = $item->getId();
-						$itemMeta = $item->getDamage();
-						$sender->sendMessage("§aItem name: §b$item->getName() \n§aItem ID: §b$item->getId() \n§aItem Metadata: §b$item->getDamage()");
-						return true;
+					$item = $sender->getInventory()->getItemInHand();
+				   $name = $item->getName();
+				   $id = $item->getId();
+				if ($id === 0) {
+					$sender->sendMessage("You aren't holding any items.");
+					return false;
+				}
+				$sender->sendMessage("Name: $name". "\n". "Id: $id". "\n". "Enchantments:");
+				if ($item->hasEnchantments() == true) {
+					foreach($item->getEnchantments() as $enchantments) {
+						$eid = $enchantments->getId();
+						$enchantmentslevel = $enchantments->getLevel();
+						$names = $this->enames[$enchantmentsid];
+						$sender->sendMessage("§7-§a $names $elevel");
+					}
+				} else {
+					$sender->sendMessage("§cNone");
+				}
+			break;
+		return true;
 					}elseif(isset($args[0]) && strtolower($args[0]) == "about"){
 						$sender->sendMessage(TF::RED . TF::RESET . TF::GRAY . "§aThis plugin is Sell Hand, based from Factions, and Prisons.");
 					}else{
