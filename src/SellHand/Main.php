@@ -221,6 +221,7 @@ public $enchantments = [
             			       $toSell = $this->sell->get($item->getName());
             				}
 					}else{
+					    $item = $sender->getInventory()->getItemInHand();
 					    $toSell = $this->sell->get($item->getDamage());
             }
             EconomyAPI::getInstance()->addMoney($sender, $toSell * $item->getCount());
