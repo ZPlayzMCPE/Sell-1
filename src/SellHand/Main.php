@@ -124,9 +124,15 @@ class Main extends PluginBase implements Listener{
 						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell hand " . TF::GRAY . "- §7Sell the item that's in your hand.");
 						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell all " . TF::GRAY . "- §7Sell every possible thing in inventory.");
 						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell about " . TF::GRAY . "- §7Plugin information");
-						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell info " . TF::GRAY . "- §7Command coming soon");
+						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell info " . TF::GRAY . "- §7Checks for a item information (the one you're holding.)");
 						return true;
 					}
+					if(isset($args[0]) && strtolower($args[0]) == "info"){
+						$item = $sender->getInventory()->getItemInHand();
+						$itemName = $item->getName();
+						$itemId = $item->getId();
+						$itemMeta = $item->getDamage();
+						$sender->sendMessage("§aItem name: §b$item->getName() \n§aItem ID: §b$item->getId() \n§aItem Metadata: §b$item->getDamage()");
 				}else{
 					$error_permission = $this->messages->get("error-permission");
 					$sender->sendMessage(TF::RED . TF::BOLD . "§2§lError: " . TF::RESET . TF::RED . $error_permission);
@@ -135,4 +141,5 @@ class Main extends PluginBase implements Listener{
 		}
 		return true;
 	}
+}
 }
