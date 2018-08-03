@@ -153,16 +153,16 @@ public $enchantments = [
 				   $name = $item->getName();
 				   $id = $item->getId();
 				if ($id === 0) {
-					$sender->sendMessage("You aren't holding any items.");
+					$sender->sendMessage("§cYou aren't holding any items.");
 					return false;
 				}
-				$sender->sendMessage("Name: $name". "\n". "Id: $id". "\n". "Enchantments:");
+				$sender->sendMessage("§bName: §3$name". "\n". "§bId: §3$id". "\n". "§bEnchantments:");
 				if ($item->hasEnchantments() == true) {
 					foreach($item->getEnchantments() as $enchantments) {
-						$eid = $enchantments->getId();
+						$enchantmentsid = $enchantments->getId();
 						$enchantmentslevel = $enchantments->getLevel();
-						$names = $this->enames[$enchantmentsid];
-						$sender->sendMessage("§7-§a $names $elevel");
+						$names = $this->enchantments[$enchantmentsid];
+						$sender->sendMessage("§3 $names §5$elevel");
 					}
 				} else {
 					$sender->sendMessage("§cNone");
