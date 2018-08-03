@@ -242,11 +242,12 @@ public $enchantments = [
 					$item = $sender->getInventory()->getItemInHand();
 				   $name = $item->getName();
 				   $id = $item->getId();
+				   $price = $this->sell->get($item->getId()) * $item->getCount();
 				if ($id === 0) {
 					$sender->sendMessage("§cYou aren't holding any items.");
 					return false;
 				}
-				$sender->sendMessage("§bName: §3$name". "\n". "§bId: §3$id". "\n". "§bEnchantments:");
+				$sender->sendMessage("§bName: §3$name". "\n". "§bId: §3$id". "\n". "§bPrice to sell: §3$price §6each". "\n". "§bEnchantments:");
 				if ($item->hasEnchantments() == true) {
 					foreach($item->getEnchantments() as $enchantments) {
 						$enchantmentsid = $enchantments->getId();
