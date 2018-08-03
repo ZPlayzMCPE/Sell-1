@@ -204,20 +204,29 @@ public $enchantments = [
 						}
 						$item = $sender->getInventory()->getItemInHand();
 						$itemId = $item->getId();
+						$itemMeta = $item->getDamage();
 						/* Check if the player is holding a block */
-						if($item->getId() === 0){
+						if($item->getId() === 0 || $item->getId() === 0){
 							$sender->sendMessage(TF::DARK_GREEN . TF::BOLD ."§2§lError: ". TF::RESET . TF::DARK_RED ."§6You aren't holding any blocks/items.");
 							return false;
 						}
 						/* Recheck if the item the player is holding is a block */
-						if($this->sell->get($itemId) == null){
+						if($this->sell->get($item->getId()) == null || $this->sell->get($item->getName()) == null || $this->sell->get($item->getDamage()) == null){
 							$sender->sendMessage(TF::RED . TF::BOLD ."§2§lError: §r§cThe item named ". TF::RESET . TF::DARK_GREEN . $item->getName() . TF::DARK_RED ." §ccannot be sold.");
 							return false;
-						}
+						 }
+						 if($this->sell->get($item->getId()) || $this->sell->get($item->getDamage())){
+             				$toSell = $this->sell->get($item->getId());
+            				}else{
+            			       $toSell = $this->sell->get($item->getName());
+            				}
+					}else{
+					    $toSell = $this->sell->get($item->getDamage());
+            }
+            EconomyAPI::getInstance()->addMoney($sender, $toSell * $item->getCount());
 						/* Sell the item in the player's hand */
-						EconomyAPI::getInstance()->addMoney($sender, $this->sell->get($itemId) * $item->getCount());
 						$sender->getInventory()->removeItem($item);
-						$price = $this->sell->get($item->getId()) * $item->getCount();
+						$price = $this->sell->get($item->getId()) * $this->sell->get($item->getDamage()) * $item->getCount();
 						$sender->sendMessage(TF::GREEN . TF::GREEN . "§5$" . $price . " §dhas been added to your account.");
 						$sender->sendMessage(TF::GREEN . "§bSold for " . TF::RED . "§3$" . $price . TF::GREEN . " §bAmount: §3" . $item->getCount() . " §bName: §3" . $item->getName() . " §bat §3$" . $this->sell->get($itemId) . " §beach.");
 
@@ -231,7 +240,8 @@ public $enchantments = [
 						$items = $sender->getInventory()->getContents();
 						foreach($items as $item){
 							if($this->sell->get($item->getId()) !== null && $this->sell->get($item->getId()) > 0){
-								$price = $this->sell->get($item->getId()) * $item->getCount();
+							if($this->sell->get($item->getDamage()) !== null && $this->sell->get($item->getDamage()) > 0){
+								$price = $this->sell->get($item->getId()) * $this->sell->get($item->getDamage()) * $item->getCount();
 								EconomyAPI::getInstance()->addMoney($sender, $price);
 								$sender->sendMessage(TF::GREEN . "§bSold for " . TF::RED . "§3$" . $price . TF::GREEN . " §bAmount: §5" . $item->getCount() . " §bName: §3" . $item->getName() . " §bat §3$" . $this->sell->get($item->getId()) . " §beach.");
 								$sender->getInventory()->remove($item);
