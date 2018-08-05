@@ -1,5 +1,4 @@
 <?php
-
 /*
 *   _____      _ _ 
 *  / ____|    | | |
@@ -12,7 +11,6 @@
 * the Free Software Foundation, either version 3 of the License, or
 * (at your option) any later version.
 */
-
 namespace SellHand;
 
 use pocketmine\Player;
@@ -25,9 +23,7 @@ use PiggyCustomEnchants\CustomEnchants\CustomEnchantsId;
 use pocketmine\item\Item;
 use pocketmine\utils\TextFormat as TF;
 use onebone\economyapi\EconomyAPI;
-
 class Main extends PluginBase implements Listener{
-
 public $enchantments = [
 		0 => "PROTECTION", 
 		1 => "FIRE_PROTECTION", 
@@ -149,7 +145,6 @@ public $enchantments = [
 	public function onLoad(){
 		$this->getLogger()->info("§ePlugin Loading!");
 	}
-
 	public function onEnable(){
     	$this->getLogger()->info(TF::GREEN.TF::BOLD."
    _____      _ _ 
@@ -171,11 +166,9 @@ public $enchantments = [
 		$this->sell = new Config($this->getDataFolder() . "sell.yml", Config::YAML);
 		$this->messages = new Config($this->getDataFolder() . "messages.yml", Config::YAML);
 	}
-
 	public function onDisable(){
     	$this->getLogger()->info("§cPlugin Disabled!");
   	}
-
 	public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool{
 		switch(strtolower($cmd->getName())){
 			case "sell":
@@ -186,13 +179,12 @@ public $enchantments = [
 				return true;
 				break;
 			}
-
 				/* Check if the player is permitted to use the command */
 				if($sender->hasPermission("sell") || $sender->hasPermission("sell.hand") || $sender->hasPermission("sell.all")){
 					/* Disallow non-survival mode abuse */
 					$error_switchgm = $this->messages->get("error-switch-gamemode");
 					if(!$sender->isSurvival()){
-						$sender->sendMessage("§2§lError: " $error_switchgm);
+						$sender->sendMessage("§2§lError: ". $error_switchgm);
 						return false;
 					}
 					
@@ -222,7 +214,6 @@ public $enchantments = [
 						$price = $this->sell->get($item->getId()) * $item->getCount();
 						$sender->sendMessage(TF::GREEN . TF::GREEN . "§5$" . $price . " §dhas been added to your account.");
 						$sender->sendMessage(TF::GREEN . "§bSold for " . TF::RED . "§3$" . $price . TF::GREEN . " §bAmount: §3" . $item->getCount() . " §bName: §3" . $item->getName() . " §bat §3$" . $this->sell->get($itemId) . " §beach.");
-
 					/* Sell All */
 					}elseif(isset($args[0]) && strtolower($args[0]) == "all"){
 						if(!$sender->hasPermission("sell.all")){
