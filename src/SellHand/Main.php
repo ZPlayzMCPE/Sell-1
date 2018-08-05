@@ -182,7 +182,7 @@ public $enchantments = [
 			// Checks if command is executed by console.
 			// It further solves the crash problem.
 			if(!($sender instanceof Player)){
-				$sender->sendMessage(TF::RED . TF::BOLD ."Error: ". TF::RESET . TF::DARK_RED ."Please use this command in game!");
+				$sender->sendMessage(TF::RED . TF::BOLD ."Error: ". TF::RESET . TF::DARK_RED ."Please use this command in game!"); //Will be configurable soon.
 				return true;
 				break;
 			}
@@ -190,8 +190,9 @@ public $enchantments = [
 				/* Check if the player is permitted to use the command */
 				if($sender->hasPermission("sell") || $sender->hasPermission("sell.hand") || $sender->hasPermission("sell.all")){
 					/* Disallow non-survival mode abuse */
+					$error_switchgm = $this->messages->get("error-switch-gamemode");
 					if(!$sender->isSurvival()){
-						$sender->sendMessage(TF::RED . TF::BOLD ."§2§lError: ". TF::RESET . TF::DARK_RED ."§cPlease switch back to survival mode.");
+						$sender->sendMessage("§2§lError: " $error_switchgm);
 						return false;
 					}
 					
@@ -204,14 +205,15 @@ public $enchantments = [
 						}
 						$item = $sender->getInventory()->getItemInHand();
 						$itemId = $item->getId();
+						$error_notholding = $this->messages->get("error-notholding");
 						/* Check if the player is holding a block */
 						if($item->getId() === 0){
-							$sender->sendMessage(TF::DARK_GREEN . TF::BOLD ."§2§lError: ". TF::RESET . TF::DARK_RED ."§6You aren't holding any blocks/items.");
+							$sender->sendMessage(TF::DARK_GREEN . TF::BOLD ."§2§lError: ". TF::RESET . TF::DARK_RED . $error_notholding);
 							return false;
 						}
 						/* Recheck if the item the player is holding is a block */
 						if($this->sell->get($itemId) == null){
-							$sender->sendMessage(TF::RED . TF::BOLD ."§2§lError: §r§cThe item named ". TF::RESET . TF::DARK_GREEN . $item->getName() . TF::DARK_RED ." §ccannot be sold.");
+							$sender->sendMessage(TF::RED . TF::BOLD ."§2§lError: §r§cThe item named ". TF::RESET . TF::DARK_GREEN . $item->getName() . TF::DARK_RED ." §ccannot be sold."); //should be configurable soon.
 							return false;
 						}
 						/* Sell the item in the player's hand */
@@ -242,12 +244,14 @@ public $enchantments = [
 					$item = $sender->getInventory()->getItemInHand();
 				   $name = $item->getName();
 				   $id = $item->getId();
+				   $amount = $item->getCount();
+				   $error_notholding = $this->messages->get("error-notholding");
 				   $price = $this->sell->get($item->getId()) * $item->getCount();
 				if ($id === 0) {
-					$sender->sendMessage("§cYou aren't holding any items.");
+					$sender->sendMessage($error_notholding);
 					return false;
 				}
-				$sender->sendMessage("§bName: §3$name". "\n". "§bId: §3$id". "\n". "§bPrice to sell: ". "§3$". "§3$price ". "§6each". "\n". "§bEnchantments:");
+				$sender->sendMessage("§bName: §3$name". "\n". "§bAmount: §3$amount". "\n". "§bId: §3$id". "\n". "§bPrice to sell: ". "§3$". "§3$price ". "§6total price". "\n". "§bEnchantments:");
 				if ($item->hasEnchantments() == true) {
 					foreach($item->getEnchantments() as $enchantments) {
 						$enchantmentsid = $enchantments->getId();
