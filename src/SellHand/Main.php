@@ -236,6 +236,7 @@ public $enchantments = [
 				   $name = $item->getName();
 				   $id = $item->getId();
 				   $amount = $item->getCount();
+				   $itemids = $this->sell->get($item->getId());
 				   $error_notholding = $this->messages->get("error-notholding");
 				   $price = $this->sell->get($item->getId()) * $item->getCount();
 				   $priceE = $this->sell->get($item->getId());
@@ -243,7 +244,7 @@ public $enchantments = [
 					$sender->sendMessage($error_notholding);
 					return false;
 				}
-				$sender->sendMessage("§bName: §3$name". "\n". "§bAmount: §3$amount". "\n". "§bId: §3$id". "\n". "§bEach price to sell: ". "§3$". "§3$priceE ". "§6each". "§bTotal price to sell:". "3$price". "\n". "§bEnchantments:");
+				$sender->sendMessage("§bName: §3$name". "\n". "§bAmount: §3$amount". "\n". "§bId: §3$id". "\n". "§bEach price to sell: ". "§3$". "§3$priceE ". "§6each". "\n". "§bTotal price to sell: ". "§3$". "§3$price". "\n". "§bList of things that can be sellable: §3$itemids".  "\n". "§bEnchantments:");
 				if ($item->hasEnchantments() == true) {
 					foreach($item->getEnchantments() as $enchantments) {
 						$enchantmentsid = $enchantments->getId();
