@@ -231,6 +231,24 @@ public $enchantments = [
 							}
 						}
 					}
+					if(isset($args[0]) && strtolower($args[0]) == "items"){
+						$items = $sender->getInventory()->getContents();
+						foreach($items as $item){
+				   $name = $item->getName();
+				   $id = $item->getId();
+				   $amount = $item->getCount();
+				   $itemids = $this->sell->get($item->getId());
+				   $error_notininventory = $ths->messages->get("notininventory");
+				   $price = $this->sell->get($item->getId()) * $item->getCount();
+				   $priceE = $this->sell->get($item->getId());
+				if ($id === 0) {
+					$sender->sendMessage($error_notininventory);
+					return false;
+				}
+				$sender->sendMessage("§aHere are a list of items that are currently in your inventory: §bName: §3$name". "\n". "§bAmount: §3$amount". "\n". "§bId: §3$id". "\n". "§bEach price to sell: ". "§3$". "§3$priceE ". "§6each". "\n". "§bTotal price to sell: ". "§3$". "§3$price");
+							return true;
+						}
+					}
 					if(isset($args[0]) && strtolower($args[0]) == "info"){
 					$item = $sender->getInventory()->getItemInHand();
 				   $name = $item->getName();
@@ -244,7 +262,7 @@ public $enchantments = [
 					$sender->sendMessage($error_notholding);
 					return false;
 				}
-				$sender->sendMessage("§bName: §3$name". "\n". "§bAmount: §3$amount". "\n". "§bId: §3$id". "\n". "§bEach price to sell: ". "§3$". "§3$priceE ". "§6each". "\n". "§bTotal price to sell: ". "§3$". "§3$price". "\n". "§bList of things that can be sellable: §3$itemids".  "\n". "§bEnchantments:");
+				$sender->sendMessage("§bName: §3$name". "\n". "§bAmount: §3$amount". "\n". "§bId: §3$id". "\n". "§bEach price to sell: ". "§3$". "§3$priceE ". "§6each". "\n". "§bTotal price to sell: ". "§3$". "§3$price".  "\n". "§bEnchantments:");
 				if ($item->hasEnchantments() == true) {
 					foreach($item->getEnchantments() as $enchantments) {
 						$enchantmentsid = $enchantments->getId();
@@ -265,6 +283,7 @@ public $enchantments = [
 						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell all " . TF::GRAY . "- §7Sell every possible thing in inventory.");
 						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell about " . TF::GRAY . "- §7Plugin information");
 						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell info " . TF::GRAY . "- §7Checks for a item information (the one you're holding.)");
+						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell items " . TF::GRAY . "- §7List of all the items you have in your inventory, and if they're sellable or not.");
 						return true;
 					}
 				}else{
