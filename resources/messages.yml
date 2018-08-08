@@ -7,5 +7,5 @@ error-nopermission-sellHand: "You don't have permission to use /sell hand."
 error-nopermission-sellAll: "You don't have permission to use /sell all."
 error-switch-gamemode: "Please switch gamemodes to survival mode."
 error-notholding: "You are not holding any items in your hand."
-$error_notininventory: "There is currently no items in your inventory."
+notininventory: "There is currently no items in your inventory."
 ...
