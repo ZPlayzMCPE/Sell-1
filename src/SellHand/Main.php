@@ -238,7 +238,7 @@ public $enchantments = [
 				   $id = $item->getId();
 				   $amount = $item->getCount();
 				   $itemids = $this->sell->get($item->getId());
-				   $error_notininventory = $ths->messages->get("notininventory");
+				   $error_notininventory = $this->messages->get("notininventory");
 				   $price = $this->sell->get($item->getId()) * $item->getCount();
 				   $priceE = $this->sell->get($item->getId());
 				if ($id === 0) {
