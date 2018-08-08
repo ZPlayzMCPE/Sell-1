@@ -221,7 +221,7 @@ public $enchantments = [
 							$sender->sendMessage(TF::RED . TF::BOLD . "§2§lError " . TF::RESET . TF::RED . $error_allPermission);
 							return false;
 						}
-						$items = $sender->getInventory()->getContents();
+						$items = $sender->getInventory()->getContents() !== $sender->getArmorInventory()->getContents();
 						foreach($items as $item){
 							if($this->sell->get($item->getId()) !== null && $this->sell->get($item->getId()) > 0){
 								$price = $this->sell->get($item->getId()) * $item->getCount();
@@ -232,7 +232,7 @@ public $enchantments = [
 						}
 					}
 					if(isset($args[0]) && strtolower($args[0]) == "items"){
-						$items = $sender->getInventory()->getContents();
+						$items = $sender->getInventory()->getContents() !== $sender->getArmorInventory()->getContents();
 						foreach($items as $item){
 				   $name = $item->getName();
 				   $id = $item->getId();
