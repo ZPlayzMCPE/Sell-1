@@ -270,7 +270,6 @@ public $enchantments = [
 				} else {
 					$sender->sendMessage("§cNone");
 				}
-			break;
 		return true;
 					}elseif(isset($args[0]) && strtolower($args[0]) == "about"){
 						$sender->sendMessage(TF::RED . TF::RESET . TF::GRAY . "§aThis plugin is Sell Hand, based from Factions, and Prisons.");
@@ -288,7 +287,6 @@ public $enchantments = [
 					$error_permission = $this->messages->get("error-permission");
 					$sender->sendMessage(TF::RED . TF::BOLD . "§2§lError: " . TF::RESET . TF::RED . $error_permission);
 				}
-				break;
 		}
 		return true;
 	}
