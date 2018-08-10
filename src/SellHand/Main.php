@@ -142,10 +142,10 @@ public $enchantments = [
     		504 => "MAGMAWALKER",
     		700 => "RADAR",
 	];
-	public function onLoad(){
+	public function onLoad() : void{
 		$this->getLogger()->info("§ePlugin Loading!");
 	}
-	public function onEnable(){
+	public function onEnable() : void{
     	$this->getLogger()->info(TF::GREEN.TF::BOLD."
    _____      _ _ 
   / ____|    | | |
@@ -169,9 +169,9 @@ public $enchantments = [
 	public function onDisable(){
     	$this->getLogger()->info("§cPlugin Disabled!");
   	}
-	public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool{
-		if(!($sender instanceof Player)){
-			if (strtolower($cmd->getName()) === "sell") {
+	 public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
+        if ($sender instanceof Player) {
+            if (strtolower($cmd->getName()) === "sell") {
                 if (empty($args)) {
                     $sender->sendMessage("§aPlease use §b/sell help §6for a list of commands");
                     return true;
@@ -287,8 +287,12 @@ public $enchantments = [
 					$error_permission = $this->messages->get("error-permission");
 					$sender->sendMessage(TF::RED . TF::BOLD . "§2§lError: " . TF::RESET . TF::RED . $error_permission);
 				}
-		}
+        } else {
+            $this->getServer()->getLogger()->info("Please run command in game");
+        }
+        return true;
+    }
+
 		return true;
 	}
-}
 }
