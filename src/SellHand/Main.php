@@ -220,6 +220,7 @@ public $enchantments = [
 						}
 						$items = $sender->getInventory()->getContents();
 						foreach($items as $item){
+							$itemid = $item->getId();
 						    if($item->getId() === 0){
 							$sender->sendMessage(TF::DARK_GREEN . TF::BOLD ."§2§lError: §cThere is no items in your inventory to sell!");
 							return false;
@@ -268,7 +269,7 @@ public $enchantments = [
 					$sender->sendMessage($error_notholding);
 					return false;
 				}
-				$sender->sendMessage("§bName: §3$name". "\n". "§bAmount: §3$amount". "\n". "§bId: §3$id". "\n". "§bEach price to sell: ". "§3$". "§3$this->sell->get($item->getId()) ". "§6each". "\n". "§bTotal price to sell: ". "§3$". "§3$price".  "\n". "§bEnchantments:");
+				$sender->sendMessage("§bName: §3$name". "\n". "§bAmount: §3$amount". "\n". "§bId: §3$id". "\n". "§bEach price to sell: ". "§3$". "§3priceE ". "§6each". "\n". "§bTotal price to sell: ". "§3$". "§3$price".  "\n". "§bEnchantments:");
 				if ($item->hasEnchantments() == true) {
 					foreach($item->getEnchantments() as $enchantments) {
 						$enchantmentsid = $enchantments->getId();
