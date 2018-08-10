@@ -229,7 +229,7 @@ public $enchantments = [
 						}
 					}
 					if(isset($args[0]) && strtolower($args[0]) == "items"){
-						$items = $sender->getInventory()->getContents() !== $sender->getArmorInventory()->getContents();
+						$items = $sender->getInventory()->getContents();
 						foreach($items as $item){
 				   $name = $item->getName();
 				   $id = $item->getId();
@@ -259,7 +259,7 @@ public $enchantments = [
 					$sender->sendMessage($error_notholding);
 					return false;
 				}
-				$sender->sendMessage("§bName: §3$name". "\n". "§bAmount: §3$amount". "\n". "§bId: §3$id". "\n". "§bEach price to sell: ". "§3$". "§3$priceE ". "§6each". "\n". "§bTotal price to sell: ". "§3$". "§3$price".  "\n". "§bEnchantments:");
+				$sender->sendMessage("§bName: §3$name". "\n". "§bAmount: §3$amount". "\n". "§bId: §3$id". "\n". "§bEach price to sell: ". "§3$". "§3$this->sell->get($item->getId()) ". "§6each". "\n". "§bTotal price to sell: ". "§3$". "§3$price".  "\n". "§bEnchantments:");
 				if ($item->hasEnchantments() == true) {
 					foreach($item->getEnchantments() as $enchantments) {
 						$enchantmentsid = $enchantments->getId();
