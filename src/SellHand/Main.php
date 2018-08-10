@@ -171,7 +171,7 @@ public $enchantments = [
   	}
 	 public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
         if ($sender instanceof Player) {
-            if (strtolower($cmd->getName()) === "sell") {
+            if (strtolower($command->getName()) === "sell") {
                 if (empty($args)) {
                     $sender->sendMessage("§aPlease use §b/sell help §6for a list of commands");
                     return true;
