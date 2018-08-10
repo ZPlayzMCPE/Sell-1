@@ -170,15 +170,12 @@ public $enchantments = [
     	$this->getLogger()->info("§cPlugin Disabled!");
   	}
 	public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool{
-		switch(strtolower($cmd->getName())){
-			case "sell":
-			// Checks if command is executed by console.
-			// It further solves the crash problem.
-			if(!($sender instanceof Player)){
-				$sender->sendMessage(TF::RED . TF::BOLD ."Error: ". TF::RESET . TF::DARK_RED ."Please use this command in game!"); //Will be configurable soon.
-				return true;
-				break;
-			}
+		if(!($sender instanceof Player)){
+			if (strtolower($cmd->getName()) === "sell") {
+                if (empty($args)) {
+                    $sender->sendMessage("§aPlease use §b/sell help §6for a list of commands");
+                    return true;
+                }
 				/* Check if the player is permitted to use the command */
 				if($sender->hasPermission("sell") || $sender->hasPermission("sell.hand") || $sender->hasPermission("sell.all")){
 					/* Disallow non-survival mode abuse */
@@ -277,7 +274,8 @@ public $enchantments = [
 		return true;
 					}elseif(isset($args[0]) && strtolower($args[0]) == "about"){
 						$sender->sendMessage(TF::RED . TF::RESET . TF::GRAY . "§aThis plugin is Sell Hand, based from Factions, and Prisons.");
-					}else{
+						
+					}elseif(isset($args[0]) && strtolower($args[0]) == "help"){
 						$sender->sendMessage(TF::RED . TF::RESET . TF::DARK_RED . "§7[§6Sell §bHelp!§7]");
 						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell hand " . TF::GRAY . "- §7Sell the item that's in your hand.");
 						$sender->sendMessage(TF::RED . "§5- " . TF::DARK_RED . "§b/sell all " . TF::GRAY . "- §7Sell every possible thing in inventory.");
@@ -294,4 +292,5 @@ public $enchantments = [
 		}
 		return true;
 	}
+}
 }
