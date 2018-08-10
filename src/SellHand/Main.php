@@ -220,16 +220,6 @@ public $enchantments = [
 						}
 						$items = $sender->getInventory()->getContents();
 						foreach($items as $item){
-							$itemid = $item->getId();
-						    if($item->getId() === 0){
-							$sender->sendMessage(TF::DARK_GREEN . TF::BOLD ."§2§lError: §cThere is no items in your inventory to sell!");
-							return false;
-						}
-							$itemid = $item->getId();
-							if($this->sell->get($itemid) == null){
-								$sender->sendMessage(TF::RED . TF::BOLD ."§2§lError: §r§cYou do not have any sellable items in your inventory.");//should be configurable soon.
-							return false;
-							}
 							if($this->sell->get($item->getId()) !== null && $this->sell->get($item->getId()) > 0){
 								$price = $this->sell->get($item->getId()) * $item->getCount();
 								EconomyAPI::getInstance()->addMoney($sender, $price);
